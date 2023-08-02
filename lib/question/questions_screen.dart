@@ -25,7 +25,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   bool isOptionSelect = false;
   int selectAnswerOption = 0;
   Color optionSelectColor = Colors.white;
-  double progressMaxWidth =  0;
+  double progressMaxWidth = 0;
   double progressWidth = 0;
 
   @override
@@ -41,10 +41,12 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);
-    _timer = Timer.periodic(oneSec, (Timer timer) {
-      setState(() {
-        progressWidth = progressMaxWidth - (_start/10)*progressMaxWidth;
-      });
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        setState(() {
+          progressWidth = progressMaxWidth - (_start / 10) * progressMaxWidth;
+        });
         if (_start == 0) {
           setState(() {
             _start = 10;
@@ -107,7 +109,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "  ${currentQuestionIndex+1}/${questionsLists.length}",
+              "  ${currentQuestionIndex + 1}/${questionsLists.length}",
               textAlign: TextAlign.start,
               style: TextStyle(
                   fontSize: 24,
@@ -115,7 +117,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                   color: Colors.black.withOpacity(0.75)),
             ),
           ],
-        ),/*IconButton(
+        ),
+        /*IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
@@ -188,9 +191,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 Container(
                                   height: 20,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Colors.grey.shade200
-                                  ),
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.grey.shade200),
                                 ),
                                 AnimatedContainer(
                                   duration: const Duration(seconds: 1),
@@ -198,8 +200,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                   width: progressWidth,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
-                                      color: Colors.blue.shade200
-                                  ),
+                                      color: Colors.blue.shade200),
                                 )
                               ],
                             ),
@@ -229,22 +230,14 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              answerOption(1,
-                                  1 == selectAnswerOption,
-                                  questionsLists[currentQuestionIndex]
-                                      .option1),
-                              answerOption(2,
-                                  2 == selectAnswerOption,
-                                  questionsLists[currentQuestionIndex]
-                                      .option2),
-                              answerOption(3,
-                                  3 == selectAnswerOption,
-                                  questionsLists[currentQuestionIndex]
-                                      .option3),
-                              answerOption(4,
-                                  4 == selectAnswerOption,
-                                  questionsLists[currentQuestionIndex]
-                                      .option4)
+                              answerOption(1, 1 == selectAnswerOption,
+                                  questionsLists[currentQuestionIndex].option1),
+                              answerOption(2, 2 == selectAnswerOption,
+                                  questionsLists[currentQuestionIndex].option2),
+                              answerOption(3, 3 == selectAnswerOption,
+                                  questionsLists[currentQuestionIndex].option3),
+                              answerOption(4, 4 == selectAnswerOption,
+                                  questionsLists[currentQuestionIndex].option4)
                             ],
                           ),
                           const SizedBox(height: 20),
@@ -258,15 +251,16 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                     if (currentQuestionIndex > 0) {
                                       currentQuestionIndex--;
                                     }
-                                    if(questionsLists[currentQuestionIndex].yourAnswer.isNotEmpty) {
-                                      if(questionsLists[currentQuestionIndex].isCorrect) {
+                                    if (questionsLists[currentQuestionIndex]
+                                        .yourAnswer
+                                        .isNotEmpty) {
+                                      if (questionsLists[currentQuestionIndex]
+                                          .isCorrect) {
                                         correctAnswer--;
                                       } else {
                                         wrongAnswer--;
                                       }
-                                    } else {
-
-                                    }
+                                    } else {}
                                   });
                                 },
                                 child: Container(
@@ -287,15 +281,23 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    if (currentQuestionIndex + 1 == questionsLists.length) {
-                                      if (questionsLists[currentQuestionIndex].yourAnswer == questionsLists[currentQuestionIndex].correctOption) {
+                                    if (currentQuestionIndex + 1 ==
+                                        questionsLists.length) {
+                                      if (questionsLists[currentQuestionIndex]
+                                              .yourAnswer ==
+                                          questionsLists[currentQuestionIndex]
+                                              .correctOption) {
                                         correctAnswer++;
-                                        questionsLists[currentQuestionIndex].isCorrect = true;
+                                        questionsLists[currentQuestionIndex]
+                                            .isCorrect = true;
                                       } else {
-                                        if (questionsLists[currentQuestionIndex].yourAnswer.isNotEmpty) {
+                                        if (questionsLists[currentQuestionIndex]
+                                            .yourAnswer
+                                            .isNotEmpty) {
                                           wrongAnswer++;
                                         }
-                                        questionsLists[currentQuestionIndex].isCorrect = false;
+                                        questionsLists[currentQuestionIndex]
+                                            .isCorrect = false;
                                       }
                                       //_timer.cancel();
                                       showDialog(
@@ -356,15 +358,21 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                       );
                                     } else {
                                       selectAnswerOption = 0;
-                                      if (questionsLists[currentQuestionIndex].yourAnswer ==
-                                          questionsLists[currentQuestionIndex].correctOption) {
+                                      if (questionsLists[currentQuestionIndex]
+                                              .yourAnswer ==
+                                          questionsLists[currentQuestionIndex]
+                                              .correctOption) {
                                         correctAnswer++;
-                                        questionsLists[currentQuestionIndex].isCorrect = true;
+                                        questionsLists[currentQuestionIndex]
+                                            .isCorrect = true;
                                       } else {
-                                        if (questionsLists[currentQuestionIndex].yourAnswer.isNotEmpty) {
+                                        if (questionsLists[currentQuestionIndex]
+                                            .yourAnswer
+                                            .isNotEmpty) {
                                           wrongAnswer++;
                                         }
-                                        questionsLists[currentQuestionIndex].isCorrect = false;
+                                        questionsLists[currentQuestionIndex]
+                                            .isCorrect = false;
                                       }
                                       currentQuestionIndex++;
                                     }
@@ -414,18 +422,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
-            color: isSelect == true ? Colors.blue.shade200 : Colors.white,
-            border: Border.all(color: Colors.blue.shade200, width: 2),
+            color: isSelect == true ? Colors.blue.shade200 : Colors.grey.shade200,
+            //border: Border.all(color: Colors.blue.shade200, width: 2),
             borderRadius: BorderRadius.circular(10)),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            /* Checkbox(value: value, onChanged: (newValue) {
-                setState(() {
-                  value = newValue!;
-                });
-              }),*/
             Expanded(
                 child: Text(optionValue,
                     style: TextStyle(

@@ -72,7 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20))),
-              child: ListView.builder(
+              child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
                 itemCount: categoryList.length,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
@@ -82,25 +85,31 @@ class _HomeScreenState extends State<HomeScreen> {
                         return QuestionsScreen(categoryName: categoryList[index].name, docId: categoryList[index].docId.path.toString(),);
                       }));
                     },
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width,
-                      height: 150,
-                      margin: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(20)),
-                          image: DecorationImage(
-                              image: NetworkImage(categoryList[index].bg),
-                              fit: BoxFit.fill),
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width,
+                        margin: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
+                            image: DecorationImage(
+                                image: NetworkImage(categoryList[index].bg),
+                                fit: BoxFit.fill),
+                            ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Center(
+                            child: Text(
+                              categoryList[index].name,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black.withOpacity(0.75),
+                                  fontSize: 20),
+                            ),
                           ),
-                      child: Center(
-                        child: Text(
-                          categoryList[index].name,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black.withOpacity(0.75),
-                              fontSize: 24),
                         ),
                       ),
                     ),
